@@ -1,0 +1,63 @@
+## shapes form after clicking 3 different spots, shouldnt overlap
+
+
+from ezgraphics import GraphicsWindow
+WIN_X=600
+WIN_Y=600
+MIDX=WIN_X//2
+MIDY=WIN_Y//2
+
+window=GraphicsWindow(WIN_X,WIN_Y)
+canvas=window.canvas()
+canvas.drawText(200,50, "Click three different places to see shapes!")
+#get points
+x1,y1= window.getMouse()
+x2, y2= window.getMouse()
+x3,y3=window.getMouse()
+color="grey"
+#Set color of triangle based on location of x1,y1
+if y1+x1>=600:
+    canvas.setFill('blue');
+    color="blue" 
+else:
+    canvas.setFill('purple')
+canvas.drawPoly(x1,y1,x2,y2,x3,y3)
+
+#set color of oval based on color of triangle
+if color=="blue": 
+    canvas.setFill('black')
+else:
+    canvas.setFill('pink')
+
+#figure out where to place second shape
+x4=0
+y4=0
+
+if x1<=300:
+    x4=x1+200
+else:
+    x4=x1-200
+
+if y1<=300:
+    y4=y1+200
+else:
+    y4=y1-200
+    
+min_x=min(x1,x2,x3)
+min_y=min(y1,y2,y3)
+max_x=max(x1,x2,x3)
+max_y=max(y1,y2,y3)
+
+width=max_x-min_x
+height=max_y-min_y    
+ 
+
+    
+    
+    
+
+canvas.drawOval(x4,y4,width,height)
+
+#set background color
+canvas.setBackground("yellow")
+window.wait()
